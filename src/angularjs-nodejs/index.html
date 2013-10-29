@@ -6,14 +6,14 @@
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <link href="assets/custom.fineuploader-4.0.1.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/fineuploader/custom.fineuploader-4.0.1.min.css" rel="stylesheet" type="text/css"/>
     <link href="custom.css" rel="stylesheet" type="text/css"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <script src="assets/custom.fineuploader-4.0.1.js"></script>
+    <script src="/fineuploader/custom.fineuploader-4.0.1.js"></script>
     <script src="fine-uploader-glue.js"></script>
 
     <script type="text/template" id="qq-template">
@@ -48,6 +48,9 @@
 
 </head>
 <body>
-    <div fine-uploader></div>
+    <div fine-uploader
+            upload-server="/uploads"
+            not-available-placeholder="/placeholders/not_available-generic.png"
+            waiting-placeholder="/placeholders/waiting-generic.png"></div>
 </body>
 </html>

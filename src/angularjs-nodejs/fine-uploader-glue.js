@@ -20,8 +20,19 @@
                 replace: true,
 
                 link: function($scope, element, attrs) {
-                    $(element).fineUploader({
+                    var endpoint = attrs.uploadServer,
+                        notAvailablePlaceholderPath = attrs.notAvailablePlaceholder,
+                        waitingPlaceholderPath = attrs.waitingPlaceholder;
 
+                    $(element).fineUploader({
+                        endpoint: endpoint,
+                        thumbnails: {
+                            placeholders: {
+                                waitUntilResponse: true,
+                                notAvailablePath: notAvailablePlaceholderPath,
+                                waitingPath: waitingPlaceholderPath
+                            }
+                        }
                     });
 
                     bindToRenderedTemplate($compile, $scope, element);
