@@ -47,7 +47,9 @@
                         waitingPlaceholderPath = attrs.waitingPlaceholder;
 
                     $(element).fineUploader({
-                        endpoint: endpoint,
+                        request: {
+                            endpoint: endpoint
+                        },
                         thumbnails: {
                             placeholders: {
                                 waitUntilResponse: true,
