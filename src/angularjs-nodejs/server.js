@@ -1,7 +1,7 @@
 var express = require("express"),
     app = express(),
     fileInputName = "qqfile",
-    maxFileSize = 15000000;
+    maxFileSize = 10000000;
 
 app.use(express.static(__dirname));
 app.use("/fineuploader", express.static(__dirname + "/assets"));
