@@ -44,18 +44,41 @@
                 link: function($scope, element, attrs) {
                     var endpoint = attrs.uploadServer,
                         notAvailablePlaceholderPath = attrs.notAvailablePlaceholder,
-                        waitingPlaceholderPath = attrs.waitingPlaceholder;
+                        waitingPlaceholderPath = attrs.waitingPlaceholder,
+                        acceptFiles = attrs.allowedMimes,
+                        sizeLimit = attrs.maxFileSize,
+                        allowedExtensions = $.map(attrs.allowedExtensions.split(","), function(extension) {
+                            return $.trim(extension);
+                        });
 
                     $(element).fineUploader({
                         request: {
                             endpoint: endpoint
                         },
+
+                        validation: {
+                            acceptFiles: acceptFiles,
+                            allowedExtensions: allowedExtensions,
+                            sizeLimit: sizeLimit
+                        },
+
+                        deleteFile: {
+                            enabled: true
+                        },
+
                         thumbnails: {
                             placeholders: {
-                                waitUntilResponse: true,
                                 notAvailablePath: notAvailablePlaceholderPath,
                                 waitingPath: waitingPlaceholderPath
                             }
+                        },
+
+                        display: {
+                            prependFiles: true
+                        },
+
+                        failedUploadTextDisplay: {
+                            mode: "custom"
                         }
                     });
 
