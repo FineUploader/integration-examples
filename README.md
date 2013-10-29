@@ -1,4 +1,7 @@
-fine-uploader-examples
+Fine Uploader Integration Examples
 ======================
 
-Using Fine Uploader to solve real problems
+Using [Fine Uploader][1] to solve real problems.
+
+    [1]: http://fineuploader.com
+
