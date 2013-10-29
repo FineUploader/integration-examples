@@ -1,0 +1,6 @@
+{
+  "name" : "fineUploaderAngularExample",
+  "description" : "Fine Uploader Angular & NodeJS example",
+  "dependencies" : ["express"],
+  "version" : "0.0.1"
+}

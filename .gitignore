@@ -1,2 +1,5 @@
 .idea/*
 *.iml
+node_modules/
+custom.fineuploader*
+assets/

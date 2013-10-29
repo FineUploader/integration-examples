@@ -1,0 +1,50 @@
+.uploader-drop-zone
+{
+    /* Static height drop zone that also contains the file list, with a border */
+    height: 300px;
+    border: dashed 1px lightgrey;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-align: center;
+
+    /* TODO scrollable */
+}
+
+LI.file-container
+{
+    /* Make sure the drop zone text is always at least a little visible */
+    opacity: .6;
+
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    margin: 10px;
+
+    /*Used to un-center the text for each file item,
+    otherwise the .uploader-drop-zone text-align style will apply*/
+    text-align: left;
+}
+
+.qq-uploader
+{
+    margin: 20px;
+    width: auto;
+}
+
+.upload-btn
+{
+    margin-bottom: 10px;
+}
+
+.drop-zone-text
+{
+    /*Vertically & horizontally center the dynamically generated drop zone message
+    inside the drop zone & make it a bit presentabl.e*/
+    position: absolute;
+    vertical-align: middle;
+    line-height: 300px;
+    font-size: 200%;
+    width: 100%;
+    left: 0;
+}
