@@ -1,20 +1,42 @@
 (function($) {
-    function bindToRenderedTemplate($compile, $scope, element) {
-        $compile(element.contents())($scope);
+    function isTouchDevice() {
+        return "ontouchstart" in window || navigator.msMaxTouchPoints > 0;
+    }
 
-        if (qq.supportedFeatures.folderDrop) {
-            $scope.dropZoneText = "Drop Files or Folders Here";
-        }
-        else if (qq.supportedFeatures.fileDrop) {
-            $scope.dropZoneText = "Drop Files Here";
+    function initButtonText($scope) {
+        var input = document.createElement("input");
+
+        input.setAttribute("multiple", "true");
+
+        if (input.multiple === true && !qq.android()) {
+            $scope.uploadButtonText = "Select Files";
         }
         else {
-            $scope.dropZoneText = "Select a File";
+            $scope.uploadButtonText = "Select a File";
         }
     }
 
+    function initDropZoneText($scope, $interpolate) {
+        if (qq.supportedFeatures.folderDrop && !isTouchDevice()) {
+            $scope.dropZoneText = "Drop Files or Folders Here";
+        }
+        else if (qq.supportedFeatures.fileDrop && !isTouchDevice()) {
+            $scope.dropZoneText = "Drop Files Here";
+        }
+        else {
+            $scope.dropZoneText = $scope.$eval($interpolate("Press '{{uploadButtonText}}'"));
+        }
+    }
+
+    function bindToRenderedTemplate($compile, $scope, $interpolate, element) {
+        $compile(element.contents())($scope);
+
+        initButtonText($scope);
+        initDropZoneText($scope, $interpolate);
+    }
+
     angular.module("fineUploaderDirective", [])
-        .directive("fineUploader", function($compile) {
+        .directive("fineUploader", function($compile, $interpolate) {
             return {
                 restrict: "A",
                 replace: true,
@@ -35,7 +57,7 @@
                         }
                     });
 
-                    bindToRenderedTemplate($compile, $scope, element);
+                    bindToRenderedTemplate($compile, $scope, $interpolate, element);
                 }
             }
         });
