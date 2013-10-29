@@ -8,7 +8,7 @@
     border-radius: 8px;
     text-align: center;
 
-    /* TODO scrollable */
+    overflow-y: scroll;
 }
 
 LI.file-container
