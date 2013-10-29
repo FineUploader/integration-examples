@@ -53,7 +53,10 @@
 
                     $(element).fineUploader({
                         request: {
-                            endpoint: endpoint
+                            endpoint: endpoint,
+                            params: {
+                                sendThumbnailUrl: !qq.supportedFeatures.imagePreviews
+                            }
                         },
 
                         validation: {
