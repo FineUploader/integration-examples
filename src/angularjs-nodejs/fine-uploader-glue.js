@@ -43,14 +43,14 @@
         });
     }
 
-    function openLargerPreview($scope, $uploadContainer, fileId, name) {
+    function openLargerPreview($scope, $uploadContainer, size, fileId, name) {
         applyNewText("previewTitle", $scope, "Generating Preview for " + name);
 
         $("#previewContainer").removeAttr("src");
         $("#previewDialog").modal("show").one("shown.bs.modal", function() {
             var modal = this;
 
-            $uploadContainer.fineUploader("drawThumbnail", fileId, $("#previewContainer"), 500).then(function() {
+            $uploadContainer.fineUploader("drawThumbnail", fileId, $("#previewContainer"), size).then(function() {
                 applyNewText("previewTitle", $scope, "Preview for " + name);
 
                 $(modal).find(".progress").hide();
@@ -95,6 +95,7 @@
                         waitingPlaceholderPath = attrs.waitingPlaceholder,
                         acceptFiles = attrs.allowedMimes,
                         sizeLimit = attrs.maxFileSize,
+                        largePreviewSize = attrs.largePreviewSize,
                         allowedExtensions = $.map(attrs.allowedExtensions.split(","), function(extension) {
                             return $.trim(extension);
                         });
@@ -151,7 +152,7 @@
                                     $thumbnail = $file.find(".qq-thumbnail-selector");
 
                                 $thumbnail.click(function() {
-                                    openLargerPreview($scope, $(element), id, name);
+                                    openLargerPreview($scope, $(element), largePreviewSize, id, name);
                                 });
                             },
 
