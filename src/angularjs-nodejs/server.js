@@ -6,6 +6,7 @@ var express = require("express"),
     assetsPath = __dirname + "/assets/",
     placeholdersPath = assetsPath + "placeholders/",
     uploadedFilesPath = assetsPath + "uploadedFiles/",
+    chunkDirName = "chunks",
     maxFileSize = 10000000;
 
 app.use(express.static(__dirname));
@@ -20,6 +21,17 @@ app.delete("/uploads/:uuid", handleDeleteFileRequest);
 
 
 function handleUploadFileRequest(req, res) {
+    res.set("Content-Type", "text/plain");
+
+    if (req.body.qqpartindex == null) {
+        handleSimpleUploadRequest(req, res);
+    }
+    else {
+        handleChunkedUploadRequest(req, res);
+    }
+}
+
+function handleSimpleUploadRequest(req, res) {
     var file = req.files[fileInputName],
         uuid = req.body.qquuid,
         sendThumbnailUrl = req.body.sendThumbnailUrl == "true",
@@ -27,14 +39,14 @@ function handleUploadFileRequest(req, res) {
             success: false
         };
 
-    res.set("Content-Type", "text/plain");
+    file.name = req.body.qqfilename;
 
     if (isValid(file)) {
         moveUploadedFile(file, uuid, function() {
             responseData.success = true;
 
             if (sendThumbnailUrl) {
-                responseData.thumbnailUrl = "/uploads/" + file.name;
+                responseData.thumbnailUrl = "/uploads/" + uuid + "/" + file.name;
             }
 
             res.send(responseData);
@@ -48,6 +60,10 @@ function handleUploadFileRequest(req, res) {
         responseData.error = "Too big!";
         res.send(responseData);
     }
+}
+
+function handleChunkedUploadRequest(req, res) {
+    //TODO
 }
 
 function handleDeleteFileRequest(req, res) {

@@ -44,18 +44,27 @@
     }
 
     function openLargerPreview($scope, $uploadContainer, size, fileId, name) {
+        var $modal = $("#previewDialog"),
+            $image = $("#previewContainer"),
+            $progress = $modal.find(".progress");
+
         applyNewText("previewTitle", $scope, "Generating Preview for " + name);
+        $image.hide();
+        $progress.show();
 
-        $("#previewContainer").removeAttr("src");
-        $("#previewDialog").modal("show").one("shown.bs.modal", function() {
-            var modal = this;
+        $modal
+            .one("shown.bs.modal", function() {
+                $uploadContainer.fineUploader("drawThumbnail", fileId, $image, size).then(function() {
+                    applyNewText("previewTitle", $scope, "Preview for " + name);
 
-            $uploadContainer.fineUploader("drawThumbnail", fileId, $("#previewContainer"), size).then(function() {
-                applyNewText("previewTitle", $scope, "Preview for " + name);
-
-                $(modal).find(".progress").hide();
-            });
-        });
+                    $progress.hide();
+                    $image.show();
+                },
+                function(img, error) {
+                    console.log(error);
+                });
+            })
+            .modal("show");
     }
 
     function updateTotalProgress() {
@@ -134,6 +143,10 @@
                             mode: "custom"
                         },
 
+                        retry: {
+                            enableAuto: true
+                        },
+
                         showMessage: function(message) {
                             applyNewText("errorMessage", $scope, message);
                             $("#errorDialog").modal("show");
@@ -141,10 +154,12 @@
 
                         callbacks: {
                             onSubmit: function(id) {
-                                var size = this.getSize(id);
+                                if (qq.supportedFeatures.progressBar) {
+                                    var size = this.getSize(id);
 
-                                perFileProgress[id] = [0, size];
-                                updateTotalProgress();
+                                    perFileProgress[id] = [0, size];
+                                    updateTotalProgress();
+                                }
                             },
 
                             onSubmitted: function(id, name) {
