@@ -35,21 +35,21 @@
         initDropZoneText($scope, $interpolate);
     }
 
-    function applyNewPreviewTitle($scope, newTitle) {
+    function applyNewText(propertyName, $scope, newText) {
         $scope.$apply(function() {
-            $scope.previewTitle = newTitle;
+            $scope[propertyName] = newText;
         });
     }
 
     function openLargerPreview($scope, $uploadContainer, fileId, name) {
-        applyNewPreviewTitle($scope, "Generating Preview for " + name);
+        applyNewText("previewTitle", $scope, "Generating Preview for " + name);
 
         $("#previewContainer").removeAttr("src");
         $("#previewDialog").modal("show").one("shown.bs.modal", function() {
             var modal = this;
 
             $uploadContainer.fineUploader("drawThumbnail", fileId, $("#previewContainer"), 500).then(function() {
-                applyNewPreviewTitle($scope, "Preview for " + name);
+                applyNewText("previewTitle", $scope, "Preview for " + name);
 
                 $(modal).find(".progress").hide();
             });
@@ -104,6 +104,11 @@
 
                         failedUploadTextDisplay: {
                             mode: "custom"
+                        },
+
+                        showMessage: function(message) {
+                            applyNewText("errorMessage", $scope, message);
+                            $("#errorDialog").modal("show");
                         },
 
                         callbacks: {
