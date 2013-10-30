@@ -21,12 +21,15 @@
             <div class="qq-upload-button-selector upload-btn btn btn-lg btn-primary">
                 <div ng-bind="uploadButtonText"></div>
             </div>
+            <div id="totalProgress" class="progress progress-striped active hide">
+                <div class="progress-bar" role="progressbar"></div>
+            </div>
             <div class="qq-upload-drop-area-selector uploader-drop-zone">
                 <span class="drop-zone-text" ng-bind="dropZoneText"></span>
                 <ul class="qq-upload-list-selector qq-upload-list">
                     <li class="file-container">
                         <div class="qq-progress-bar-container-selector progress">
-                            <div class="qq-progress-bar-selector bar"></div>
+                            <div class="qq-progress-bar-selector progress-bar"></div>
                         </div>
                         <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
                         <img class="qq-thumbnail-selector" qq-max-size="50" qq-server-scale>

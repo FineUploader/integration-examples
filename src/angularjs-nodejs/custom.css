@@ -53,3 +53,8 @@ LI.file-container
     width: 100%;
     left: 0;
 }
+
+#totalProgress .progress-bar
+{
+    height: 35px;
+}
