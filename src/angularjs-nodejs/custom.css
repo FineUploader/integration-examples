@@ -26,6 +26,11 @@ LI.file-container
     text-align: left;
 }
 
+.qq-thumbnail-selector
+{
+    cursor: pointer;
+}
+
 .qq-uploader
 {
     margin: 20px;

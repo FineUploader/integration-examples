@@ -35,6 +35,27 @@
         initDropZoneText($scope, $interpolate);
     }
 
+    function applyNewPreviewTitle($scope, newTitle) {
+        $scope.$apply(function() {
+            $scope.previewTitle = newTitle;
+        });
+    }
+
+    function openLargerPreview($scope, $uploadContainer, fileId, name) {
+        applyNewPreviewTitle($scope, "Generating Preview for " + name);
+
+        $("#previewContainer").removeAttr("src");
+        $("#previewDialog").modal("show").one("shown.bs.modal", function() {
+            var modal = this;
+
+            $uploadContainer.fineUploader("drawThumbnail", fileId, $("#previewContainer"), 500).then(function() {
+                applyNewPreviewTitle($scope, "Preview for " + name);
+
+                $(modal).find(".progress").hide();
+            });
+        });
+    }
+
     angular.module("fineUploaderDirective", [])
         .directive("fineUploader", function($compile, $interpolate) {
             return {
@@ -66,6 +87,7 @@
                         },
 
                         deleteFile: {
+                            endpoint: endpoint,
                             enabled: true
                         },
 
@@ -82,6 +104,17 @@
 
                         failedUploadTextDisplay: {
                             mode: "custom"
+                        },
+
+                        callbacks: {
+                            onSubmitted: function(id, name) {
+                                var $file = $(this.getItemByFileId(id)),
+                                    $thumbnail = $file.find(".qq-thumbnail-selector");
+
+                                $thumbnail.click(function() {
+                                    openLargerPreview($scope, $(element), id, name);
+                                });
+                            }
                         }
                     });
 

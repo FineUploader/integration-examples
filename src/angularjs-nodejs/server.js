@@ -1,50 +1,95 @@
 var express = require("express"),
     fs = require("fs"),
+    rimraf = require("rimraf"),
     app = express(),
     fileInputName = "qqfile",
+    assetsPath = __dirname + "/assets/",
+    placeholdersPath = assetsPath + "placeholders/",
+    uploadedFilesPath = assetsPath + "uploadedFiles/",
     maxFileSize = 10000000;
 
 app.use(express.static(__dirname));
-app.use("/fineuploader", express.static(__dirname + "/assets"));
-app.use("/placeholders", express.static(__dirname + "/assets/placeholders"));
-app.use("/uploads", express.static(__dirname + "/assets/uploadedFiles"));
+app.use("/fineuploader", express.static(assetsPath));
+app.use("/placeholders", express.static(placeholdersPath));
+app.use("/uploads", express.static(uploadedFilesPath));
 app.use(express.bodyParser());
 app.listen(8000);
 
-app.post("/uploads", function(req, res) {
+app.post("/uploads", handleUploadFileRequest);
+app.delete("/uploads/:uuid", handleDeleteFileRequest);
+
+
+function handleUploadFileRequest(req, res) {
     var file = req.files[fileInputName],
+        uuid = req.body.qquuid,
         sendThumbnailUrl = req.body.sendThumbnailUrl == "true",
-        fileDestination = __dirname + "/assets/uploadedFiles/" + file.name,
-        source = fs.createReadStream(file.path),
-        dest = fs.createWriteStream(fileDestination),
         responseData = {
             success: false
         };
 
     res.set("Content-Type", "text/plain");
 
-    if (file.size < maxFileSize) {
-        responseData.success = true;
+    if (isValid(file)) {
+        moveUploadedFile(file, uuid, function() {
+            responseData.success = true;
 
-        source
-            .pipe(dest)
+            if (sendThumbnailUrl) {
+                responseData.thumbnailUrl = "/uploads/" + file.name;
+            }
 
-            .on("end", function() {
-                if (sendThumbnailUrl) {
-                    responseData.thumbnailUrl = "/uploads/" + file.name;
-                }
-
-                res.send(responseData);
-            })
-
-            .on("error", function(error) {
-                console.log("Problem copying file: " + error.stack);
-                responseData.error = "Problem copying the file!";
-                res.send(responseData);
-            });
+            res.send(responseData);
+        },
+        function() {
+            responseData.error = "Problem copying the file!";
+            res.send(responseData);
+        });
     }
     else {
         responseData.error = "Too big!";
         res.send(responseData);
     }
-});
+}
+
+function handleDeleteFileRequest(req, res) {
+    var uuid = req.params.uuid,
+        dirToDelete = uploadedFilesPath + uuid;
+
+    rimraf(dirToDelete, function(error) {
+        if (error) {
+            console.error("Problem deleting file! " + error);
+            res.status(500);
+        }
+
+        res.send();
+    });
+}
+
+function isValid(file) {
+    return file.size < maxFileSize;
+}
+
+function moveUploadedFile(file, uuid, success, failure) {
+    var destinationDir = uploadedFilesPath + uuid,
+        fileDestination = destinationDir + "/" + file.name;
+
+    fs.mkdir(destinationDir, function(error) {
+        var sourceStream, destStream;
+
+        if (error) {
+            console.error("Problem creating directory " + destinationDir + ": " + error);
+            failure();
+        }
+        else {
+            sourceStream = fs.createReadStream(file.path);
+            destStream = fs.createWriteStream(fileDestination);
+
+            sourceStream
+                .on("error", function(error) {
+                    console.error("Problem copying file: " + error.stack);
+                    failure();
+                })
+                .on("end", success)
+                .pipe(destStream);
+        }
+    });
+}
