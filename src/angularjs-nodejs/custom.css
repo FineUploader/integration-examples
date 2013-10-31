@@ -40,6 +40,8 @@ LI.file-container
 .upload-btn
 {
     margin-bottom: 10px;
+    /* only needed for IE7 */
+    width: 128px;
 }
 
 .drop-zone-text
