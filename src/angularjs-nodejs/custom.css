@@ -60,3 +60,11 @@ LI.file-container
 {
     height: 35px;
 }
+
+.file-info
+{
+    display: inline-block;
+    width: 400px;
+    zoom: 1;
+    *display: inline;
+}
