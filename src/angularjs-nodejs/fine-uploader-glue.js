@@ -14,7 +14,7 @@
  *  - Enables chunking & auto-resume support.
  *
  * Requirements:
- *  - Fine Uploader UI jQuery w/ delete file, preview, and drag & drop support enabled
+ *  - Fine Uploader UI jQuery 4.0.3+ w/ delete file, preview, and drag & drop support enabled
  *  - Bootstrap 3.x
  *  - jQuery 1.5+
  *  - AngularJS 1.0.7+
