@@ -1,3 +1,25 @@
+/**
+ * AngularJS directive for Fine Uploader UI jQuery (traditional endpoints).
+ * Maintained by Widen Enterprises.
+ *
+ * This example:
+ *  - Delegates error messages to Bootstrap's modal component.
+ *  - Generates client-side pre-upload image previews (where supported).
+ *  - Allows files to be excluded based on extension and MIME type (where supported).
+ *  - Determines the most appropriate upload button and drop zone text based on browser capabilities.
+ *  - Renders larger image preview on-demand in a Bootstrap modal.
+ *  - Keeps an aggregate progress bar up-to-date based on upload status for all files.
+ *  - Enables delete file support.
+ *  - Ensure newly submitted files are added to the top of the visible list.
+ *  - Enables chunking & auto-resume support.
+ *
+ * Requirements:
+ *  - Fine Uploader UI jQuery w/ delete file, preview, and drag & drop support enabled
+ *  - Bootstrap 3.x
+ *  - jQuery 1.5+
+ *  - AngularJS 1.0.7+
+ */
+
 (function($) {
     var perFileProgress = {};
 
