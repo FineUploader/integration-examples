@@ -1,8 +1,30 @@
-var express = require("express"),
+/**
+ * NodeJs Server-Side Example for Fine Uploader (traditional endpoints).
+ * Maintained by Widen Enterprises.
+ *
+ * This example:
+ *  - handles non-CORS environments
+ *  - handles delete file requests assuming the method is DELETE
+ *  - Ensures the file size does not exceed the max
+ *  - Handles chunked upload requests
+ *  - Returns a public URL to allow Fine Uploader to display the image
+ *    in the browser if the browser is not capable of generating previews
+ *    pre-upload client-side.
+ *
+ * Requirements:
+ *  - express (for handling requests)
+ *  - rimraf (for "rm -rf" support)
+ *  - mkdirp (for "mkdir -p" support)
+ */
+
+var //dependencies
+    express = require("express"),
     fs = require("fs"),
     rimraf = require("rimraf"),
     mkdirp = require("mkdirp"),
     app = express(),
+
+    // paths/constants
     fileInputName = "qqfile",
     assetsPath = __dirname + "/assets/",
     placeholdersPath = assetsPath + "placeholders/",
@@ -10,13 +32,15 @@ var express = require("express"),
     chunkDirName = "chunks",
     maxFileSize = 10000000;
 
+
+app.use(express.bodyParser());
+app.listen(8000);
+
+// routes
 app.use(express.static(__dirname));
 app.use("/fineuploader", express.static(assetsPath));
 app.use("/placeholders", express.static(placeholdersPath));
 app.use("/uploads", express.static(uploadedFilesPath));
-app.use(express.bodyParser());
-app.listen(8000);
-
 app.post("/uploads", onUpload);
 app.delete("/uploads/:uuid", onDeleteFile);
 
@@ -24,6 +48,7 @@ app.delete("/uploads/:uuid", onDeleteFile);
 function onUpload(req, res) {
     var partIndex = req.body.qqpartindex;
 
+    // text/plain is required to ensure support for IE9 and older
     res.set("Content-Type", "text/plain");
 
     if (partIndex == null) {
