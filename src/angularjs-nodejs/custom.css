@@ -1,3 +1,12 @@
+/*
+
+CSS for Fine Uploader UI.  Depends on a matching HTML file.
+Maintained by Widen Enterprises.
+
+See the HTML file comments for more details.
+
+*/
+
 .uploader-drop-zone
 {
     /* Static height drop zone that also contains the file list, with a border */
@@ -8,6 +17,7 @@
     border-radius: 8px;
     text-align: center;
 
+    /* Make the drop zone scollable */
     overflow-y: scroll;
 }
 
@@ -16,16 +26,19 @@ LI.file-container
     /* Make sure the drop zone text is always at least a little visible */
     opacity: .6;
 
+    /* Rounded file container corners, where supported */
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
+
     margin: 10px;
 
-    /*Used to un-center the text for each file item,
-    otherwise the .uploader-drop-zone text-align style will apply*/
+    /* Used to un-center the text for each file item,
+    otherwise the .uploader-drop-zone text-align style will apply */
     text-align: left;
 }
 
+/* The thumbnails are clickable (to order display of a larger image in a modal) */
 .qq-thumbnail-selector
 {
     cursor: pointer;
@@ -40,14 +53,15 @@ LI.file-container
 .upload-btn
 {
     margin-bottom: 10px;
+
     /* only needed for IE7 */
     width: 128px;
 }
 
 .drop-zone-text
 {
-    /*Vertically & horizontally center the dynamically generated drop zone message
-    inside the drop zone & make it a bit presentabl.e*/
+    /* Vertically & horizontally center the dynamically generated drop zone message
+    inside the drop zone & make it a bit presentable */
     position: absolute;
     vertical-align: middle;
     line-height: 300px;
@@ -65,6 +79,8 @@ LI.file-container
 {
     display: inline-block;
     width: 400px;
+
+    /* IE7 hack to deal with an inline-block bug in the browser */
     zoom: 1;
     *display: inline;
 }

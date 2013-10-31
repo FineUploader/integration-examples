@@ -1,3 +1,28 @@
+<!--
+
+HTML for Fine Uploader UI jQuery (traditional endpoints) that depends on an AngularJS directive.
+Maintained by Widen Enterprises.
+
+This example:
+ - Styles all buttons, progress bars, etc using Bootstrap CSS.
+ - Styles an error message & preview popup using Bootstrap's modal component.
+ - Displays an on-demand scaled and oriented preview (where supported) in a Bootstrap modal
+ - Styles an aggregate progress bar, inserted into the Fine Uploader UI template, fed data by the directive.
+ - Orders a maximum 50x50 thumbnail to be displayed next to each submitted file.
+ - Creates a visible drop zone with text (fed by the directive) that is scrollable & restricted in height.
+ - Ensures file-related buttons all line up in the UI.
+ - Orders the directive to reject files that are not supported images.
+ - Orders the directive to reject files that are too large (where supported).
+ - Passes all options to the directive via attributes.
+
+Requirements:
+ - Fine Uploader UI jQuery w/ delete file, preview, and drag & drop support enabled
+ - Bootstrap 3.x
+ - jQuery 1.5+
+ - AngularJS 1.0.7+
+
+-->
+
 <!DOCTYPE html>
 <html id="ng-app" ng-app="fineUploaderDirective">
 <head>
