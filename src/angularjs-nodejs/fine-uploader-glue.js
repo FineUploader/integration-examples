@@ -54,6 +54,7 @@
 
         $modal
             .one("shown.bs.modal", function() {
+                $image.attr("src", "");
                 $uploadContainer.fineUploader("drawThumbnail", fileId, $image, size).then(function() {
                     applyNewText("previewTitle", $scope, "Preview for " + name);
 
