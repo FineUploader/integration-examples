@@ -147,6 +147,14 @@
                             enableAuto: true
                         },
 
+                        chunking: {
+                            enabled: true
+                        },
+
+                        resume: {
+                            enabled: true
+                        },
+
                         showMessage: function(message) {
                             applyNewText("errorMessage", $scope, message);
                             $("#errorDialog").modal("show");
