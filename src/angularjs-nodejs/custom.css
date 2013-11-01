@@ -55,7 +55,7 @@ LI.file-container
     margin-bottom: 10px;
 
     /* only needed for IE7 */
-    width: 128px;
+    *width: 128px;
 }
 
 .drop-zone-text
