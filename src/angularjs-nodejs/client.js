@@ -84,7 +84,8 @@
                     $image.show();
                 },
                 function(img, error) {
-                    console.log(error);
+                    $progress.hide();
+                    applyNewText("previewTitle", $scope, "Preview not available");
                 });
             })
             .modal("show");
