@@ -5,17 +5,19 @@ $(function() {
             if (authResult.status.signed_in) {
                 var expiresInMs = parseInt(authResult.expires_in) * 1000;
 
-                $("#google-signin").hide();
                 $(document).trigger("tokenReceived.s3Demo");
 
-                s3DemoGlobals.idToken = authResult.id_token;
                 setUserName(authResult.access_token);
-                s3DemoGlobals.assumeRoleWithWebIdentity();
+
+                s3DemoGlobals.assumeRoleWithWebIdentity({
+                    roleArn: "arn:aws:iam::776099607611:role/demo-s3-clientside-signing",
+                    idToken: authResult.id_token
+                });
 
                 setTimeout(function() {
                     alert("Token expired. You must sign in again.");
                     $(document).trigger("tokenExpired.s3Demo");
-                }, expiresInMs)
+                }, expiresInMs - 10000)
             }
             else {
                 $(document).trigger("tokenExpired.s3Demo");
@@ -56,4 +58,8 @@ $(function() {
     referenceScriptEl.parentNode.insertBefore(plusOnScriptEl, referenceScriptEl);
 
     $(document).on("tokenExpired.s3Demo", showButton);
+    $(document).on("tokenReceived.s3Demo", function() {
+        $("#google-signin").hide();
+    });
+
 });

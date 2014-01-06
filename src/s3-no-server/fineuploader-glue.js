@@ -58,12 +58,14 @@ $(function() {
         .on("credentialsExpired", function() {
             var promise = new qq.Promise();
 
-            assumeRoleWithWebIdentity(function(error, data) {
-                if (error) {
-                    promise.failure("Failed to assume role");
-                }
-                else {
-                    promise.success(s3DemoGlobals.getFuCredentials(data));
+            assumeRoleWithWebIdentity({
+                callback: function(error, data) {
+                    if (error) {
+                        promise.failure("Failed to assume role");
+                    }
+                    else {
+                        promise.success(s3DemoGlobals.getFuCredentials(data));
+                    }
                 }
             });
 

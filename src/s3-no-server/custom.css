@@ -89,3 +89,9 @@ LI.file-container
     position: relative;
     top: -20px;
 }
+
+.signin-button
+{
+    float: left;
+    margin-right: 7px;
+}

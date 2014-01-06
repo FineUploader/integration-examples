@@ -55,7 +55,9 @@ Requirements:
                         <button class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</button>
                         <button class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</button>
                         <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
-                        <a class="view-btn" target="_blank"><input type="button" value="View"></a>
+                        <a class="view-btn" target="_blank" style="display: none;">
+                            <input type="button" value="View">
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -67,12 +69,7 @@ Requirements:
     </script>
 
     <script>
-        var s3DemoGlobals = {
-                userName: null,
-                idToken: null,
-                assumeRoleWithWebIdentity: function() {},
-                getFuCredentials: function() {}
-            };
+        var s3DemoGlobals = {};
     </script>
 
     <link href="fineuploader-4.2.0-6.min.css" rel='stylesheet' type='text/css'>
@@ -82,6 +79,7 @@ Requirements:
     <script src="s3.jquery.fineuploader-4.2.0-6.min.js"></script>
     <script src="aws-sdk-glue.js"></script>
     <script src="google-auth.js"></script>
+    <script src="amazon-auth.js"></script>
     <script src="fineuploader-glue.js"></script>
 
 </head>
@@ -92,6 +90,7 @@ Requirements:
     <h3 class="demo-title">Upload files to Amazon S3 - No server-side code required</h3>
 
     <!--[if !IE | gt IE 9]> -->
+    <div id="amazon-root"></div>
     <script src="//sdk.amazonaws.com/js/aws-sdk-2.0.0-rc4.min.js"></script>
     <p class="demo-description">Don't want to write ANY server-side code at all?  Leave EVERYTHING up
     to the browser and S3.</p>
@@ -107,7 +106,7 @@ Requirements:
         to support legacy browsers, you can do that too, but some server-side code will be required
         to utilize the AWS temporary credentials calls.  See the client-side signing feature page
         in the documentation for more details.</p>
-        <div id="google-signin">
+        <div id="google-signin" class="signin-button">
           <span
             class="g-signin"
             data-callback="s3GoogleOauthHandler"
@@ -118,6 +117,12 @@ Requirements:
             data-approvalprompt="force">
           </span>
         </div>
+
+        <a href="#" id="amazon-signin" class="signin-button">
+          <img border="0" alt="Login with Amazon"
+            src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
+            width="156" height="32" />
+        </a>
 
         <div id="uploader"></div>
     </div>
