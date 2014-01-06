@@ -10,9 +10,8 @@ $(function() {
                 $('#uploader').fineUploaderS3("setCredentials", s3DemoGlobals.getFuCredentials(data));
             }
         },
-        requireLogin = function() {
+        hideUploader = function() {
             $("#uploader").hide();
-            s3DemoGlobals.requireLogin();
         };
 
     $("#uploader").fineUploaderS3({
@@ -72,5 +71,10 @@ $(function() {
         });
 
     s3DemoGlobals.updateCredentials = updateCredentials;
-    requireLogin();
+
+    $(document).on("tokenExpired.s3Demo", hideUploader);
+    $(document).on("tokenReceived.s3Demo", function() {
+        $("#uploader").show();
+    });
+    $(document).trigger("tokenExpired.s3Demo");
 });

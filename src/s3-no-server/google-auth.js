@@ -3,17 +3,25 @@ $(function() {
         referenceScriptEl = document.getElementsByTagName('script')[0],
         s3GoogleOauthHandler = function(authResult) {
             if (authResult.status.signed_in) {
+                var expiresInMs = parseInt(authResult.expires_in) * 1000;
+
                 $("#google-signin").hide();
-                $("#uploader").show();
+                $(document).trigger("tokenReceived.s3Demo");
+
                 s3DemoGlobals.idToken = authResult.id_token;
                 setUserName(authResult.access_token);
                 s3DemoGlobals.assumeRoleWithWebIdentity();
+
+                setTimeout(function() {
+                    alert("Token expired. You must sign in again.");
+                    $(document).trigger("tokenExpired.s3Demo");
+                }, expiresInMs)
             }
             else {
-                requireLogin();
+                $(document).trigger("tokenExpired.s3Demo");
             }
         },
-        requireLogin = function() {
+        showButton = function() {
             $("#google-signin").show();
         },
         setUserName = function(accessToken) {
@@ -41,10 +49,11 @@ $(function() {
 
     window.s3GoogleOauthHandler = s3GoogleOauthHandler;
     s3DemoGlobals.getFuCredentials = getFuCredentials;
-    s3DemoGlobals.requireLogin = requireLogin;
 
     plusOnScriptEl.type = "text/javascript";
     plusOnScriptEl.async = true;
     plusOnScriptEl.src = "https://plus.google.com/js/client:plusone.js";
     referenceScriptEl.parentNode.insertBefore(plusOnScriptEl, referenceScriptEl);
+
+    $(document).on("tokenExpired.s3Demo", showButton);
 });
