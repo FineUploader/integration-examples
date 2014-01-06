@@ -1,0 +1,91 @@
+/*
+
+CSS for Fine Uploader UI.  Depends on a matching HTML file.
+Maintained by Widen Enterprises.
+
+See the HTML file comments for more details.
+
+*/
+
+.uploader-drop-zone
+{
+    /* Static height drop zone that also contains the file list, with a border */
+    height: 300px;
+    border: solid 1px black;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    text-align: center;
+
+    /* Make the drop zone scollable */
+    overflow-y: scroll;
+}
+
+LI.file-container
+{
+    /* Make sure the drop zone text is always at least a little visible */
+    opacity: .6;
+
+    /* Rounded file container corners */
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+
+    margin: 10px;
+
+    /* Used to un-center the text for each file item,
+    otherwise the .uploader-drop-zone text-align style will apply */
+    text-align: left;
+}
+
+.qq-uploader
+{
+    margin: 20px;
+    width: auto;
+}
+
+.qq-upload-button
+{
+    margin-bottom: 10px;
+
+    /* Rounded upload button corners */
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.drop-zone-text
+{
+    /* Vertically & horizontally center the dynamically generated drop zone message
+    inside the drop zone & make it a bit presentable */
+    position: absolute;
+    vertical-align: middle;
+    line-height: 300px;
+    font-size: 200%;
+    width: 100%;
+    left: 0;
+}
+
+.file-info
+{
+    display: inline-block;
+    width: 400px;
+}
+
+.file-container SPAN
+{
+    position: relative;
+    top: -20px;
+}
+
+.file-container BUTTON
+{
+    position: relative;
+    top: -20px;
+}
+
+.file-container A
+{
+    position: relative;
+    top: -20px;
+}

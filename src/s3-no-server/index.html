@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<!--
+Index page for Fine Uploader UI S3 jQuery.  Used to demonstrate uploading to S3 without writing a single line
+of server-side code.
+
+Maintained by Widen Enterprises.
+
+This example:
+ - Orders a maximum 50x50 thumbnail to be displayed next to each submitted file.
+ - Creates a visible drop zone with a text background that is scrollable & restricted in height.
+ - Ensures file-related buttons all line up in the UI.
+ - Rejects files that are too large.
+ - Restricts session to 5 net uploaded files.
+ - Breaks large files up into separate chunks/requests.
+ - Utilizes Google as the identity provider.
+ - Refreshes the AWS credentials before they expire.
+ - Prompts the user to re-login before the OAuth2 bearer token from Google expires.
+ - Saves the files in the S3 bucket under a "directory" named after the signed-in user.
+
+Requirements:
+ - A "modern" browser (not IE9 or older)
+ - Fine Uploader S3 UI jQuery w/ preview and drag & drop support enabled
+ - jQuery 1.5+
+ - AWS JavaScript SDK
+ - Google+ OAuth JavaScript SDK
+ - Simple web server to server static content (HTML, JavaScript, & placeholder files)
+-->
+<head>
+    <title>S3 server-less example</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fine Uploader S3 No Server Demo">
+    <meta name="author" content="Widen">
+
+    <script type="text/template" id="qq-template">
+        <div class="qq-uploader-selector qq-uploader">
+            <div class="qq-upload-button-selector qq-upload-button">
+                <div>Select Files</div>
+            </div>
+            <div class="qq-upload-drop-area-selector uploader-drop-zone">
+                <span class="drop-zone-text">Drop Files Here</span>
+                <ul class="qq-upload-list-selector qq-upload-list">
+                    <li class="file-container">
+                        <div class="qq-progress-bar-container-selector">
+                            <div class="qq-progress-bar-selector qq-progress-bar"></div>
+                        </div>
+                        <div class="file-info">
+                            <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                            <img class="qq-thumbnail-selector" qq-max-size="50" qq-server-scale>
+                            <span class="qq-upload-file-selector qq-upload-file"></span>
+                            <span class="qq-upload-size-selector qq-upload-size"></span>
+                        </div>
+                        <button class="qq-upload-cancel-selector qq-upload-cancel" href="#">Cancel</button>
+                        <button class="qq-upload-retry-selector qq-upload-retry" href="#">Retry</button>
+                        <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                        <a class="view-btn" target="_blank"><input type="button" value="View"></a>
+                    </li>
+                </ul>
+            </div>
+            <span class="qq-drop-processing-selector qq-drop-processing">
+                <span>Processing dropped files...</span>
+                <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+            </span>
+        </div>
+    </script>
+
+    <script>
+        var s3DemoGlobals = {
+                userName: null,
+                idToken: null,
+                assumeRoleWithWebIdentity: function() {},
+                getFuCredentials: function() {},
+                requireLogin: function() {}
+            };
+    </script>
+
+    <link href="fineuploader-4.2.0-6.min.css" rel='stylesheet' type='text/css'>
+    <link href="custom.css" rel='stylesheet' type='text/css'>
+
+    <script src="//code.jquery.com/jquery-latest.js"></script>
+    <script src="s3.jquery.fineuploader-4.2.0-6.min.js"></script>
+    <script src="aws-sdk-glue.js"></script>
+    <script src="google-auth.js"></script>
+    <script src="fineuploader-glue.js"></script>
+
+</head>
+<body style="background-color: #f5f5f5">
+    <img style="display:block; margin-left: auto; margin-right: auto" src="http://fineuploader.com/img/fineuploader-header-logo.png">
+    <br/>
+
+    <h3 class="demo-title">Upload files to Amazon S3 - No server-side code required</h3>
+
+    <!--[if !IE | gt IE 9]> -->
+    <script src="//sdk.amazonaws.com/js/aws-sdk-2.0.0-rc4.min.js"></script>
+    <p class="demo-description">Don't want to write ANY server-side code at all?  Leave EVERYTHING up
+    to the browser and S3.</p>
+    <div style="text-align: left;">
+        <p>If you don't need to support legacy browsers (IE 9 and older), and you don't want to mess with
+        PHP, Java, or any other server-side language, we've got you covered!  Fine Uploader can handle
+        the S3 request signing for you.  Just provide temporary credentials for your locked-down IAM user
+        and pass them off to Fine Uploader S3.  You can do this all client-side, easily and securely,
+        using Google, Facebook, or Amazon as an identity provider, and the AWS JavaScript SDK.
+        Need more details? Read the blog post that covers step-by-step setup for this workflow.</p>
+
+        <p>Note: If you simply want to avoid the signature HTTP requests for each file/chunk, and need
+        to support legacy browsers, you can do that too, but some server-side code will be required
+        to utilize the AWS temporary credentials calls.  See the client-side signing feature page
+        in the documentation for more details.</p>
+        <div id="google-signin">
+          <span
+            class="g-signin"
+            data-callback="s3GoogleOauthHandler"
+            data-clientid="443841406310-9eekn8bs1srkc6o49v03lbusku72ac7i.apps.googleusercontent.com"
+            data-cookiepolicy="single_host_origin"
+            data-requestvisibleactions="http://schemas.google.com/AddActivity"
+            data-scope="https://www.googleapis.com/auth/plus.login"
+            data-approvalprompt="force">
+          </span>
+        </div>
+
+        <div id="uploader"></div>
+    </div>
+    <!-- <![endif]-->
+
+    <!--[if lt IE 10]>
+    <div>Sorry, this demo is only functional in modern browsers, such as IE10+, Chrome, Firefox, Opera, and Safari.</div>
+    <![endif]-->
+
+</body>
+</html>
