@@ -1,4 +1,4 @@
-# Fine Uploader S3: Uploading file to S3 without writing any server-side code at all
+# Fine Uploader S3: Uploading file to S3 without writing any server-side code
 
 ### All you need is a simple HTTP server to host the HTML/javascript files.
 
