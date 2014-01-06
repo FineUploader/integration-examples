@@ -7,7 +7,7 @@ $(function() {
     sdkScriptEl.type = "text/javascript";
     sdkScriptEl.async = true;
     sdkScriptEl.id = "amazon-login-sdk";
-    sdkScriptEl.src = "//api-cdn.amazon.com/sdk/login1.js";
+    sdkScriptEl.src = "https://api-cdn.amazon.com/sdk/login1.js";
     document.getElementById("amazon-root").appendChild(sdkScriptEl);
 
     document.getElementById("amazon-signin").onclick = function() {
@@ -16,7 +16,7 @@ $(function() {
             .onComplete(function(authResult) {
                 if (authResult.status === "complete") {
                     var expiresInMs = parseInt(authResult.expires_in) * 1000;
-                    $("#amazon-signin").hide();
+
                     $(document).trigger("tokenReceived.s3Demo");
 
                     amazon.Login.retrieveProfile(function(response) {
