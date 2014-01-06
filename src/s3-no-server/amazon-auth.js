@@ -7,7 +7,7 @@ $(function() {
     sdkScriptEl.type = "text/javascript";
     sdkScriptEl.async = true;
     sdkScriptEl.id = "amazon-login-sdk";
-    sdkScriptEl.src = "https://api-cdn.amazon.com/sdk/login1.js";
+    sdkScriptEl.src = "//api-cdn.amazon.com/sdk/login1.js";
     document.getElementById("amazon-root").appendChild(sdkScriptEl);
 
     document.getElementById("amazon-signin").onclick = function() {
