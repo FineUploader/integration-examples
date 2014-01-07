@@ -2,6 +2,7 @@
 
 ### All you need is a simple HTTP server to host the HTML/javascript files.
 
+There is a live demo using this code at https://fineuploader-s3-client-demo.s3.amazonaws.com/index.html.
 
 Please read the [blog post that covers this example][1] in detail.
 
