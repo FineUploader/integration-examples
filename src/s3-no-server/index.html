@@ -79,12 +79,15 @@ Requirements:
     <img style="display:block; margin-left: auto; margin-right: auto" src="https://raw.github.com/Widen/fine-uploader/gh-pages/img/fineuploader-header-logo.png">
     <br/>
 
-    <h3 class="demo-title">Upload files to Amazon S3 - No server-side code required</h3>
+    <h2 class="demo-title">Upload files to Amazon S3 - No server-side code required</h2>
 
+    <!-- Only lods the content between the "if tags" if you are not running IE9 or older -->
     <!--[if !IE | gt IE 9]> -->
+    <!-- Required for the Amazon & Facebook JavaScript SDKs -->
     <div id="amazon-root"></div>
     <div id="fb-root"></div>
 
+    <!-- Scripts required for this demo -->
     <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="s3.jquery.fineuploader-4.2.0-6.min.js"></script>
     <script src="aws-sdk-glue.js"></script>
@@ -92,22 +95,20 @@ Requirements:
     <script src="amazon-auth.js"></script>
     <script src="facebook-auth.js"></script>
     <script src="fineuploader-glue.js"></script>
-
     <script src="//sdk.amazonaws.com/js/aws-sdk-2.0.0-rc4.min.js"></script>
+
     <p class="demo-description">Don't want to write ANY server-side code at all?  Leave EVERYTHING up
     to the browser and S3.</p>
     <div style="text-align: left;">
-        <p>If you don't need to support legacy browsers (IE 9 and older), and you don't want to mess with
-        PHP, Java, or any other server-side language, we've got you covered!  Fine Uploader can handle
-        the S3 request signing for you.  Just provide temporary credentials for your locked-down IAM user
-        and pass them off to Fine Uploader S3.  You can do this all client-side, easily and securely,
-        using Google, Facebook, or Amazon as an identity provider, and the AWS JavaScript SDK.
+        <p>Fine Uploader can handle the S3 request signing for you.  Just provide temporary credentials for
+        your locked-down IAM user and pass them off to Fine Uploader S3.  You can do this all client-side,
+        easily and securely, using Google, Facebook, or Amazon as an identity provider, and the AWS JavaScript SDK.
         Need more details? Read the blog post that covers step-by-step setup for this workflow.</p>
 
-        <p>Note: If you simply want to avoid the signature HTTP requests for each file/chunk, and need
-        to support legacy browsers, you can do that too, but some server-side code will be required
-        to utilize the AWS temporary credentials calls.  See the client-side signing feature page
-        in the documentation for more details.</p>
+        <p>This demo uses only client-side code to authenticate and upload files to S3.  We have not written
+        any server-side code at all.  In fact, the entire example is hosted in an S3 bucket.  Try it out
+        by choosing one of the identity providers below.</p>
+
         <div id="google-signin" class="signin-button">
           <span
             class="g-signin"
@@ -135,6 +136,11 @@ Requirements:
         <div id="uploader"></div>
     </div>
     <!-- <![endif]-->
+
+    <p>Note: If you simply want to avoid the signature HTTP requests for each file/chunk, and need
+    to support legacy browsers, you can do that too, but some server-side code will be required
+    to utilize the AWS temporary credentials calls.  See the client-side signing feature page
+    in the documentation for more details.</p>
 
     <!--[if lt IE 10]>
     <div>Sorry, this demo is only functional in modern browsers, such as IE10+, Chrome, Firefox, Opera, and Safari.</div>

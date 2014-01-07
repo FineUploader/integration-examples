@@ -7,6 +7,11 @@ See the HTML file comments for more details.
 
 */
 
+.demo-title
+{
+    text-align: center;
+}
+
 .uploader-drop-zone
 {
     /* Static height drop zone that also contains the file list, with a border */
