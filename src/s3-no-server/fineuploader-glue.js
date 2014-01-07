@@ -27,7 +27,7 @@ $(function() {
                 var filename = this.getName(id),
                     uuid = this.getUuid(id);
 
-                return qq.format("{}/{}.{}", s3DemoGlobals.userName.replace("/\s/g", "_"), uuid, qq.getExtension(filename));
+                return qq.format("{}/{}.{}", s3DemoGlobals.userName, uuid, qq.getExtension(filename));
             }
         },
         chunking: {
