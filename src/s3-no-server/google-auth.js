@@ -1,7 +1,13 @@
+/**
+ * Handles the Google login workflow.
+ */
 $(function() {
     var plusOnScriptEl = document.createElement('script'),
         referenceScriptEl = document.getElementsByTagName('script')[0],
+
+        // Called when the auth attempt has completed
         s3GoogleOauthHandler = function(authResult) {
+            // If authenticated...
             if (authResult.status.signed_in) {
                 var expiresInMs = parseInt(authResult.expires_in) * 1000;
 
@@ -9,11 +15,13 @@ $(function() {
 
                 setUserName(authResult.access_token);
 
+                // Get S3 credentials
                 s3DemoGlobals.assumeRoleWithWebIdentity({
                     roleArn: "arn:aws:iam::776099607611:role/demo-s3-noserver-google",
                     idToken: authResult.id_token
                 });
 
+                // Ensure the user is asked to re-auth before the token expires
                 setTimeout(function() {
                     alert("Token expired. You must sign in again.");
                     $(document).trigger("tokenExpired.s3Demo");
@@ -23,9 +31,12 @@ $(function() {
                 $(document).trigger("tokenExpired.s3Demo");
             }
         },
+
         showButton = function() {
             $("#google-signin").show();
         },
+
+        // Grabs the authenticated user's name (for file storage)
         setUserName = function(accessToken) {
             var xhr = new XMLHttpRequest();
 
@@ -39,19 +50,11 @@ $(function() {
 
             xhr.open("GET", "https://www.googleapis.com/plus/v1/people/me?access_token=" + accessToken);
             xhr.send();
-        },
-        getFuCredentials = function(data) {
-            return {
-                accessKey: data.Credentials.AccessKeyId,
-                secretKey: data.Credentials.SecretAccessKey,
-                sessionToken: data.Credentials.SessionToken,
-                expiration: data.Credentials.Expiration
-            };
         };
 
     window.s3GoogleOauthHandler = s3GoogleOauthHandler;
-    s3DemoGlobals.getFuCredentials = getFuCredentials;
 
+    // Setup the script tag used to load the SDK
     plusOnScriptEl.type = "text/javascript";
     plusOnScriptEl.async = true;
     plusOnScriptEl.src = "https://plus.google.com/js/client:plusone.js";

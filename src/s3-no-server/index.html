@@ -109,6 +109,7 @@ Requirements:
         any server-side code at all.  In fact, the entire example is hosted in an S3 bucket.  Try it out
         by choosing one of the identity providers below.</p>
 
+        <!-- Google sign-in button -->
         <div id="google-signin" class="signin-button">
           <span
             class="g-signin"
@@ -121,12 +122,14 @@ Requirements:
           </span>
         </div>
 
+        <!-- Amazon sign-in button -->
         <a href="#" id="amazon-signin" class="signin-button">
           <img border="0" alt="Login with Amazon"
             src="https://images-na.ssl-images-amazon.com/images/G/01/lwa/btnLWA_gold_156x32.png"
             width="156" height="32" />
         </a>
 
+        <!-- Facebook sign-in button -->
         <a href="#" id="facebook-signin">
             <img border="0" alt="Login with Facebook"
                         src="https://fbcdn-dragon-a.akamaihd.net/hphotos-ak-ash3/851579_604690072906757_1648100996_n.png"
@@ -142,6 +145,7 @@ Requirements:
     to utilize the AWS temporary credentials calls.  See the client-side signing feature page
     in the documentation for more details.</p>
 
+    <!-- Displayed in place of login buttons & uploader if the browser is IE9 or older. -->
     <!--[if lt IE 10]>
     <div>Sorry, this demo is only functional in modern browsers, such as IE10+, Chrome, Firefox, Opera, and Safari.</div>
     <![endif]-->
