@@ -42,7 +42,7 @@ $(function() {
 
                         s3DemoGlobals.assumeRoleWithWebIdentity({
                             idToken: response.authResponse.accessToken,
-                            roleArn: "arn:aws:iam::776099607611:role/demo-s3-clientside-facebook",
+                            roleArn: "arn:aws:iam::776099607611:role/demo-s3-noserver-facebook",
                             providerId: "graph.facebook.com"
                         });
 

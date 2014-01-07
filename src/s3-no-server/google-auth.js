@@ -10,7 +10,7 @@ $(function() {
                 setUserName(authResult.access_token);
 
                 s3DemoGlobals.assumeRoleWithWebIdentity({
-                    roleArn: "arn:aws:iam::776099607611:role/demo-s3-clientside-signing",
+                    roleArn: "arn:aws:iam::776099607611:role/demo-s3-noserver-google",
                     idToken: authResult.id_token
                 });
 
