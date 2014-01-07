@@ -77,22 +77,9 @@ LI.file-container
     width: 400px;
 }
 
-.file-container SPAN
+IMG
 {
-    position: relative;
-    top: -20px;
-}
-
-.file-container BUTTON
-{
-    position: relative;
-    top: -20px;
-}
-
-.file-container A
-{
-    position: relative;
-    top: -20px;
+    vertical-align: middle;
 }
 
 .signin-button
