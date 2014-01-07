@@ -11,7 +11,11 @@ $(function() {
     document.getElementById("amazon-root").appendChild(sdkScriptEl);
 
     document.getElementById("amazon-signin").onclick = function() {
-        options = { scope : 'profile' };
+        options = {
+            scope : "profile",
+            interactive: "always"
+        };
+
         amazon.Login.authorize(options)
             .onComplete(function(authResult) {
                 if (authResult.status === "complete") {
