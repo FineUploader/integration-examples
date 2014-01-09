@@ -10,6 +10,11 @@ See the HTML file comments for more details.
 .demo-title
 {
     text-align: center;
+    font-weight: 200;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    color: #00abc7;
+    font-size: 36px;
 }
 
 .uploader-drop-zone
@@ -45,7 +50,7 @@ LI.file-container
 
 .qq-uploader
 {
-    margin: 20px;
+    margin: 20px 0;
     width: auto;
 }
 
@@ -69,6 +74,7 @@ LI.file-container
     font-size: 200%;
     width: 100%;
     left: 0;
+    color: #cccccc;
 }
 
 .file-info
@@ -84,6 +90,109 @@ IMG
 
 .signin-button
 {
-    float: left;
-    margin-right: 7px;
+    margin-bottom: 20px;
+    display:block;
+}
+
+body
+{
+    background-color: #FEFEFC;
+    font-family: 'Maven Pro', sans-serif;
+    padding: 40px 0;
+}
+
+a
+{
+    color: #0088CC;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+p
+{
+    font-size: 14px;
+}
+
+h2
+{
+    font-weight: 200;
+    margin-bottom: 5px;
+    color: #00abc7;
+    font-size: 36px;
+}
+
+h3
+{
+    font-weight:300;
+    font-size: 24px;
+    line-height: 28px;
+    color: #00abc7;
+}
+
+h4
+{
+    color: #e65c47;
+    font-weight: 300;
+}
+
+.wrapper
+{
+    width: 80%;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.sign-in-buttons
+{
+    text-align: center;
+}
+
+.hero-unit
+{
+    margin-top:30px;
+    padding: 20px 40px;
+    line-height: 18px;
+}
+
+
+
+.footer
+{
+    padding: 70px 0;
+    border-top: 1px solid #e5e5e5;
+    background-color: #525252;
+    color :#eee;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    height: 120px;
+    width: 100%;
+    margin-top: 60px;
+}
+.footer p
+{
+    margin-bottom: 0;
+    color: #eee;
+}
+.footer-links
+{
+    margin: 10px 0;
+}
+.footer-links li
+{
+    display: inline;
+    margin-right: 10px;
+}
+.footer a
+{
+    color: #66ccdd;
+}
+.widenIcon
+{
+    margin: -3px 0px 0px 4px;
 }
