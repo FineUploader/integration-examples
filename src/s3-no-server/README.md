@@ -9,5 +9,5 @@ Please read the [blog post that covers this example][1] in detail.
 You can also read more on Fine Uploader's client-side signing feature (new as of 4.2) on the [associated feature's
 documentation page][2].
 
-[1]: TODO
-[2]: TODO
+[1]: http://wp.me/p3FpYP-9w
+[2]: http://docs.fineuploader.com/features/s3-no-server.html
