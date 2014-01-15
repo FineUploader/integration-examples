@@ -10,4 +10,4 @@ You can also read more on Fine Uploader's client-side signing feature (new as of
 documentation page][2].
 
 [1]: http://wp.me/p3FpYP-9w
-[2]: http://docs.fineuploader.com/features/s3-no-server.html
+[2]: http://docs.fineuploader.com/features/no-server-uploads.html
