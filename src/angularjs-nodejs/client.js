@@ -76,17 +76,21 @@
 
         $modal
             .one("shown.bs.modal", function() {
-                $image.attr("src", "");
-                $uploadContainer.fineUploader("drawThumbnail", fileId, $image, size).then(function() {
-                    applyNewText("previewTitle", $scope, "Preview for " + name);
+                $image.removeAttr("src");
+                // setTimeout: Attempt to ensure img.onload is not called after we attempt to draw thumbnail
+                // but before picture is transferred to img element as a result of resetting the img.src above.
+                setTimeout(function() {
+                    $uploadContainer.fineUploader("drawThumbnail", fileId, $image, size).then(function() {
+                        applyNewText("previewTitle", $scope, "Preview for " + name);
 
-                    $progress.hide();
-                    $image.show();
-                },
-                function(img, error) {
-                    $progress.hide();
-                    applyNewText("previewTitle", $scope, "Preview not available");
-                });
+                        $progress.hide();
+                        $image.show();
+                    },
+                    function(img, error) {
+                        $progress.hide();
+                        applyNewText("previewTitle", $scope, "Preview not available");
+                    });
+                }, 0);
             })
             .modal("show");
     }
@@ -134,6 +138,7 @@
                         });
 
                     $(element).fineUploader({
+                        debug: true,
                         request: {
                             endpoint: endpoint,
                             params: {
