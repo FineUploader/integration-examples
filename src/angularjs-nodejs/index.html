@@ -33,14 +33,14 @@ Requirements:
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <link href="/fineuploader/custom.fineuploader-4.0.3.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/fineuploader/fineuploader-4.4.0.min.css" rel="stylesheet" type="text/css"/>
     <link href="custom.css" rel="stylesheet" type="text/css"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <script src="/fineuploader/custom.fineuploader-4.0.3.min.js"></script>
+    <script src="/fineuploader/jquery.fineuploader-4.4.0.min.js"></script>
     <script src="client.js"></script>
 
     <script type="text/template" id="qq-template">
@@ -48,8 +48,8 @@ Requirements:
             <div class="qq-upload-button-selector upload-btn btn btn-lg btn-primary">
                 <div ng-bind="uploadButtonText"></div>
             </div>
-            <div id="totalProgress" class="progress progress-striped active hide">
-                <div class="progress-bar" role="progressbar"></div>
+            <div id="totalProgress" class="qq-total-progress-bar-container-selector progress progress-striped active">
+                <div class="qq-total-progress-bar-selector progress-bar" role="progressbar"></div>
             </div>
             <div class="qq-upload-drop-area-selector uploader-drop-zone">
                 <span class="drop-zone-text" ng-bind="dropZoneText"></span>

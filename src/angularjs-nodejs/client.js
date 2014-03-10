@@ -14,15 +14,13 @@
  *  - Enables chunking & auto-resume support.
  *
  * Requirements:
- *  - Fine Uploader UI jQuery 4.1.0+ w/ delete file, preview, and drag & drop support enabled
+ *  - Fine Uploader UI jQuery 4.4.0+ w/ delete file, preview, drag & drop support, and total progress support included
  *  - Bootstrap 3.x
  *  - jQuery 1.5+
  *  - AngularJS 1.0.7+
  */
 
 (function($) {
-    var perFileProgress = {};
-
     function isTouchDevice() {
         return "ontouchstart" in window || navigator.msMaxTouchPoints > 0;
     }
@@ -95,31 +93,6 @@
             .modal("show");
     }
 
-    function updateTotalProgress() {
-        var $container = $("#totalProgress"),
-            $bar = $container.find(".progress-bar"),
-            totalSent = 0,
-            totalSize = 0,
-            percentComplete = 0;
-
-        $.each(perFileProgress, function(fileId, progressData) {
-            totalSent += progressData[0];
-            totalSize += progressData[1];
-        });
-        percentComplete = Math.round((totalSent/totalSize) * 100);
-
-        if (totalSent !== totalSize) {
-            $bar.css({
-                width: percentComplete + "%"
-            });
-
-            $container.removeClass("hide");
-        }
-        else {
-            $container.addClass("hide");
-        }
-    }
-
     angular.module("fineUploaderDirective", [])
         .directive("fineUploader", function($compile, $interpolate) {
             return {
@@ -190,15 +163,6 @@
                         },
 
                         callbacks: {
-                            onSubmit: function(id) {
-                                if (qq.supportedFeatures.progressBar) {
-                                    var size = this.getSize(id);
-
-                                    perFileProgress[id] = [0, size];
-                                    updateTotalProgress();
-                                }
-                            },
-
                             onSubmitted: function(id, name) {
                                 var $file = $(this.getItemByFileId(id)),
                                     $thumbnail = $file.find(".qq-thumbnail-selector");
@@ -206,25 +170,6 @@
                                 $thumbnail.click(function() {
                                     openLargerPreview($scope, $(element), largePreviewSize, id, name);
                                 });
-                            },
-
-                            onProgress: function(id, name, sent, total) {
-                                perFileProgress[id] = [sent, total];
-                                updateTotalProgress();
-                            },
-
-                            onCancel: function(id) {
-                                if (qq.supportedFeatures.progressBar) {
-                                    delete perFileProgress[id];
-                                    updateTotalProgress();
-                                }
-                            },
-
-                            onComplete: function(id, name, response) {
-                                if (!response.success) {
-                                    delete perFileProgress[id];
-                                    updateTotalProgress();
-                                }
                             }
                         }
                     });
