@@ -2,9 +2,15 @@
   "name" : "fineUploaderAngularExample",
   "description" : "Fine Uploader Angular & NodeJS example",
   "dependencies" : {
-      "express": "3.x",
-      "rimraf": "2.2.2",
-      "mkdirp": "0.3.5"
+    "angular": "1.4.x",
+    "express": "4.13.3",
+    "fine-uploader": "~5.x.x",
+    "fine-uploader-traditional-server": "1.0.0",
+    "mkdirp": "0.5.1",
+    "rimraf": "2.5.0"
   },
-  "version" : "0.0.1"
+  "engines": {
+    "node" : ">=5.0.0"
+  },
+  "version" : "1.0.0"
 }
