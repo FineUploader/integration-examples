@@ -15,6 +15,6 @@
   },
   "version" : "1.0.0",
   "scripts": {
-    "server": "node node_modules/fine-uploader-traditional-server/nodejs"
+    "server": "PUBLIC_DIR=$(pwd)  NODE_MODULES_DIR=$(pwd)/node_modules/  UPLOADED_FILES_DIR=$(pwd)/uploads/ node node_modules/fine-uploader-traditional-server/nodejs"
   }
 }
