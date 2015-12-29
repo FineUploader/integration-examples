@@ -6,22 +6,19 @@ HTML for Fine Uploader UI jQuery (traditional endpoints) that depends on an Angu
 Maintained by Widen Enterprises.
 
 This example:
- - Styles all buttons, progress bars, etc using Bootstrap CSS.
- - Styles an error message & preview popup using Bootstrap's modal component.
- - Displays an on-demand scaled and oriented preview (where supported) in a Bootstrap modal
- - Styles an aggregate progress bar, inserted into the Fine Uploader UI template, fed data by the directive.
+ - Styles all buttons, progress bars, etc using Fine Uploader UI.
+ - Styles an error message & preview popup using CSS and the native <dialog> element with a polyfill for non-compliant browsers.
+ - Displays an on-demand scaled and oriented preview (where supported) in a dialog.
  - Orders a maximum 50x50 thumbnail to be displayed next to each submitted file.
  - Creates a visible drop zone with text (fed by the directive) that is scrollable & restricted in height.
- - Ensures file-related buttons all line up in the UI.
  - Orders the directive to reject files that are not supported images.
  - Orders the directive to reject files that are too large (where supported).
  - Passes all options to the directive via attributes.
 
 Requirements:
- - Fine Uploader UI jQuery w/ delete file, preview, and drag & drop support enabled
- - Bootstrap 3.x
- - jQuery 1.5+
- - AngularJS 1.0.7+
+ - Fine Uploader 5.4.1+
+ - AngularJS 1.5.0+
+ - dialog-polyfill 0.4.2+
 
 -->
 
@@ -31,16 +28,12 @@ Requirements:
     <title>Fine Uploader AngularJS Integration Example</title>
     <meta charset="utf-8" />
 
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <link href="/fineuploader/fineuploader-4.4.0.min.css" rel="stylesheet" type="text/css"/>
-    <link href="custom.css" rel="stylesheet" type="text/css"/>
+    <link href="node_modules/fine-uploader/fine-uploader/fine-uploader.min.css" rel="stylesheet" type="text/css"/>
+    <link href="node_modules/dialog-polyfill/dialog-polyfill.css" rel="stylesheet" type="text/css"/>
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <!-- TODO add this next file to your project.  See http://fineuploader.com/downloads -->
-    <script src="/fineuploader/jquery.fineuploader-4.4.0.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/fine-uploader/fine-uploader/fine-uploader.min.js"></script>
+    <script src="node_modules/dialog-polyfill/dialog-polyfill.js"></script>
     <script src="client.js"></script>
 
     <script type="text/template" id="qq-template">

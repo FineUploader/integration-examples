@@ -3,14 +3,18 @@
   "description" : "Fine Uploader Angular & NodeJS example",
   "dependencies" : {
     "angular": "1.4.x",
+    "dialog-polyfill": "0.4.2",
     "express": "4.13.3",
     "fine-uploader": "~5.x.x",
-    "fine-uploader-traditional-server": "1.0.0",
+    "fine-uploader-traditional-server": "3.0.0",
     "mkdirp": "0.5.1",
     "rimraf": "2.5.0"
   },
   "engines": {
     "node" : ">=5.0.0"
   },
-  "version" : "1.0.0"
+  "version" : "1.0.0",
+  "scripts": {
+    "server": "node node_modules/fine-uploader-traditional-server/nodejs"
+  }
 }
