@@ -6,7 +6,7 @@
     "dialog-polyfill": "0.4.2",
     "express": "4.13.3",
     "fine-uploader": "~5.x.x",
-    "fine-uploader-traditional-server": "3.0.0",
+    "fine-uploader-traditional-server": "3.0.2",
     "mkdirp": "0.5.1",
     "rimraf": "2.5.0"
   },
