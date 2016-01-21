@@ -56,14 +56,12 @@
         initDropZoneText($scope, $interpolate);
     }
 
-    function applyNewText(propertyName, $scope, newText) {
-        $scope.$apply(function() {
-            $scope[propertyName] = newText;
+    function openLargerPreview($scope, uploader, modal, size, fileId) {
+        uploader.drawThumbnail(fileId, new Image(), size).then(function(image) {
+            $scope.largePreviewUri = image.src;
+            $scope.$apply();
+            modal.showModal();
         });
-    }
-
-    function openLargerPreview($scope, $uploadContainer, size, fileId, name) {
-        //TODO
     }
 
     angular.module("fineUploaderDirective", [])
@@ -78,18 +76,14 @@
                         waitingPlaceholderPath = attrs.waitingPlaceholder,
                         acceptFiles = attrs.allowedMimes,
                         sizeLimit = attrs.maxFileSize,
-                        largePreviewSize = attrs.largePreviewSize,
+                        largePreviewSize = parseInt(attrs.largePreviewSize),
                         allowedExtensions = JSON.parse(attrs.allowedExtensions),
+                        previewDialog = document.querySelector('.large-preview'),
 
                         uploader = new qq.FineUploader({
                             debug: true,
                             element: element[0],
-                            request: {
-                                endpoint: endpoint,
-                                params: {
-                                    sendThumbnailUrl: !qq.supportedFeatures.imagePreviews
-                                }
-                            },
+                            request: {endpoint: endpoint},
 
                             validation: {
                                 acceptFiles: acceptFiles,
@@ -131,16 +125,17 @@
 
                             callbacks: {
                                 onSubmitted: function(id, name) {
-                                    var $file = $(this.getItemByFileId(id)),
-                                        $thumbnail = $file.find(".qq-thumbnail-selector");
+                                    var fileEl = this.getItemByFileId(id),
+                                        thumbnailEl = fileEl.querySelector('.thumbnail-button');
 
-                                    $thumbnail.click(function() {
-                                        openLargerPreview($scope, $(element), largePreviewSize, id, name);
+                                    thumbnailEl.addEventListener('click', function() {
+                                        openLargerPreview($scope, uploader, previewDialog, largePreviewSize, id);
                                     });
                                 }
                             }
                         });
 
+                    dialogPolyfill.registerDialog(previewDialog);
                     bindToRenderedTemplate($compile, $scope, $interpolate, element);
                 }
             }
