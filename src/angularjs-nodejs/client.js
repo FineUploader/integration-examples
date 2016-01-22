@@ -64,6 +64,10 @@
         });
     }
 
+    function closePreview(modal) {
+        modal.close();
+    }
+
     angular.module("fineUploaderDirective", [])
         .directive("fineUploader", function($compile, $interpolate) {
             return {
@@ -136,6 +140,7 @@
                         });
 
                     dialogPolyfill.registerDialog(previewDialog);
+                    $scope.closePreview = closePreview.bind(this, previewDialog);
                     bindToRenderedTemplate($compile, $scope, $interpolate, element);
                 }
             }
