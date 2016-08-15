@@ -1,6 +1,6 @@
 Fine Uploader Integration Examples
 ======================
-[![Freenode](https://img.shields.io/badge/chat-on%20freenode-brightgreen.svg)](irc://chat.freenode.net/#fineuploader)
+[![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
 Using [Fine Uploader][1] to solve real problems.
 
