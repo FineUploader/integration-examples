@@ -9,5 +9,5 @@ Please read the [blog post that covers this example][1] in detail.
 You can also read more on Fine Uploader's client-side signing feature (new as of 4.2) on the [associated feature's
 documentation page][2].
 
-[1]: http://wp.me/p3FpYP-9w
+[1]: https://blog.fineuploader.com/uploads-without-any-server-code-3d7219167591
 [2]: http://docs.fineuploader.com/features/no-server-uploads.html
