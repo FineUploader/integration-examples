@@ -3,4 +3,4 @@
 
 Please read the [blog post that covers this example][1] in detail.
 
-[1]: http://wp.me/p3FpYP-8o
+[1]: https://blog.fineuploader.com/full-stack-javascript-image-uploader-using-angularjs-node-js-6e2fca020073
